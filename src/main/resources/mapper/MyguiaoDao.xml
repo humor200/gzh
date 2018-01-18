@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhw.weixin.dao.MygupiaoDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <select id="queryByUsernameAndCode" resultType="Mygupiao">
+        SELECT
+        *
+        FROM
+        mygupiao
+        WHERE
+        username = #{username}
+        AND
+        gupiao_code = #{gupiao_code}
+    </select>
+
+    <select id="listMyGupiao" resultType="Mygupiao">
+        SELECT
+        *
+        FROM
+        mygupiao
+        WHERE
+        username = #{username}
+        ORDER BY
+        ctime
+    </select>
+
+    <insert id="addMyGupiao">
+        insert into mygupiao (username, gupiao_code, gupiao_name,money, ctime)
+        values (#{username}, #{gupiaoCode}, #{gupiaoName}, #{money}, UNIX_TIMESTAMP(NOW()))
+    </insert>
+</mapper>

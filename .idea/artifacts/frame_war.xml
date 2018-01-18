@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="frame:war">
+    <output-path>$PROJECT_DIR$/../frame Maven Webapp/target</output-path>
+    <root id="archive" name="frame-1.0.war">
+      <element id="artifact" artifact-name="frame:war exploded" />
+    </root>
+  </artifact>
+</component>

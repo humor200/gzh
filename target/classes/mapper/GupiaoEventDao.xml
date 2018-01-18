@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhw.weixin.dao.GupiaoEventDao">
+
+    <select id="listEvent" resultType="GupiaoEvent">
+        SELECT
+        *
+        FROM
+        gupiao_event
+        WHERE
+        mygupiao_id = #{mygupiao_id}
+        ORDER BY
+        ctime
+    </select>
+
+    <insert id="addGupiaoEvent">
+        insert into gupiao_event (mygupiao_id, type, content, money, ctime)
+        values (#{mygupiaoId}, #{type}, #{content}, #{money}, UNIX_TIMESTAMP(NOW()))
+    </insert>
+</mapper>

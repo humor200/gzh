@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../frame Maven Webapp/frame.iml" filepath="$PROJECT_DIR$/../frame Maven Webapp/frame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gzh.iml" filepath="$PROJECT_DIR$/gzh.iml" />
+    </modules>
+  </component>
+</project>

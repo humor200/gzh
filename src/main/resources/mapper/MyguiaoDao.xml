@@ -13,6 +13,8 @@
         username = #{username}
         AND
         gupiao_code = #{gupiao_code}
+        AND
+        valid = 1
     </select>
 
     <select id="listMyGupiao" resultType="Mygupiao">
@@ -22,6 +24,8 @@
         mygupiao
         WHERE
         username = #{username}
+        AND
+        valid = 1
         ORDER BY
         ctime
     </select>
@@ -29,5 +33,14 @@
     <insert id="addMyGupiao">
         insert into mygupiao (username, gupiao_code, gupiao_name,money, ctime)
         values (#{username}, #{gupiaoCode}, #{gupiaoName}, #{money}, UNIX_TIMESTAMP(NOW()))
+        ON DUPLICATE KEY UPDATE valid = 1
+    </insert>
+
+    <insert id="removeMyGupiao">
+        update mygupiao set valid = 0
+        WHERE
+        username = #{username}
+        AND
+        gupiao_code = #{gupiao_code}
     </insert>
 </mapper>

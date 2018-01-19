@@ -4,8 +4,8 @@ package com.zhw.weixin.enums;
  * Created by zhanghongwei on 17/12/29.
  */
 
-import com.zhw.weixin.logic.GupiaoDetailResolver;
-import com.zhw.weixin.logic.ListOverResolver;
+import com.zhw.weixin.logic.resolver.GupiaoDetailResolver;
+import com.zhw.weixin.logic.resolver.ListOverResolver;
 
 import java.util.HashMap;
 import java.util.Map;

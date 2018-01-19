@@ -5,8 +5,6 @@ package com.zhw.weixin.service;
  */
 
 import com.zhw.weixin.bean.ReceiveXmlEntity;
-import com.zhw.weixin.dao.AppointmentDao;
-import com.zhw.weixin.dao.BookDao;
 import com.zhw.weixin.dao.MygupiaoDao;
 import com.zhw.weixin.dto.AppointExecution;
 import com.zhw.weixin.entity.Appointment;
@@ -41,6 +39,10 @@ public class MygupiaoService {
 
     public Mygupiao getByUsernameAndCode(String username, String gupiaoCode) {
         return mygupiaoDao.queryByUsernameAndCode(username, gupiaoCode);
+    }
+
+    public int removeByUsernameAndCode(String username, String gupiaoCode) {
+        return mygupiaoDao.removeMyGupiao(username, gupiaoCode);
     }
 
     /**

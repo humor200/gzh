@@ -5,7 +5,6 @@ import com.zhw.weixin.dto.Result;
 import com.zhw.weixin.entity.Book;
 import com.zhw.weixin.enums.AppointStateEnum;
 import com.zhw.weixin.logic.WechatProcess;
-import com.zhw.weixin.service.BookService;
 import com.zhw.weixin.service.MainProcessService;
 import com.zhw.weixin.util.SignUtil;
 import org.slf4j.Logger;

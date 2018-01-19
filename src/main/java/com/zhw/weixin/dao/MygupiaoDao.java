@@ -27,4 +27,6 @@ public interface MygupiaoDao {
      * 增加自选股
      */
     int addMyGupiao(Mygupiao mygupiao);
+
+    int removeMyGupiao(@Param("username") String username, @Param("gupiao_code") String gupiaoCode);
 }

@@ -7,8 +7,6 @@ package com.zhw.weixin.service;
 import com.zhw.weixin.bean.ReceiveXmlEntity;
 import com.zhw.weixin.cons.Common;
 import com.zhw.weixin.cons.Cons;
-import com.zhw.weixin.dao.AppointmentDao;
-import com.zhw.weixin.dao.BookDao;
 import com.zhw.weixin.dto.AppointExecution;
 import com.zhw.weixin.entity.Appointment;
 import com.zhw.weixin.entity.Book;

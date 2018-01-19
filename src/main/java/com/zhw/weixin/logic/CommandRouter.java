@@ -2,13 +2,13 @@ package com.zhw.weixin.logic;
 
 import com.zhw.weixin.bean.UserContext;
 import com.zhw.weixin.cons.Common;
-import com.zhw.weixin.entity.GupiaoEvent;
 import com.zhw.weixin.entity.Mygupiao;
 import com.zhw.weixin.enums.CommandTypeEnum;
+import com.zhw.weixin.logic.resolver.ICommandResolver;
+import com.zhw.weixin.logic.resolver.ListOverResolver;
 import com.zhw.weixin.service.GupiaoEventService;
 import com.zhw.weixin.service.MygupiaoService;
 import com.zhw.weixin.util.DateUtil;
-import com.zhw.weixin.util.SinaUtil;
 import com.zhw.weixin.util.SpringContextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +72,7 @@ public class CommandRouter {
             }
             result.append("\r\n");
             result.append("请输入数字编号查看该股票日记\r\n");
-            result.append("输入“"+Common.addGupiao+"股票编码”可直接添加您的自选股\r\n");
+            result.append(Common.buildCommonMsg());
             listOverResolver.contextMake(mygupiaoList, username, null);
         } else if (content.startsWith(Common.addGupiao)) {
             String code = content.substring(1);
@@ -87,39 +87,23 @@ public class CommandRouter {
                     result.append("您已成功添加" + code + "股票到您的自选股里!");
                 }
             }
-//        } else if (content.startsWith("show:")) {
-//            String[] strings = content.split(":");
-//            Mygupiao mygupiao = mygupiaoService.getByUsernameAndCode(username, strings[1]);
-//            if(mygupiao == null) {
-//                result.append("对不起，您没有这只股票,请添加到自选股里");
-//            } else {
-//
-//                result.append("**股票代码：").append(mygupiao.getGupiaoCode()).append(",名称").append(mygupiao.getGupiaoName());
-//                result.append(",添加时股价:").append(mygupiao.getMoney()).append(",添加时间:").append(DateUtil.stampToDate(mygupiao.getCtime())).append("**\r\n");
-//                result.append("--------------------\r\n");
-//
-//                List<GupiaoEvent> gupiaoEventList = gupiaoEventService.getList(mygupiao.getId());
-//                if (gupiaoEventList.size() == 0) {
-//                    result.append("对不起，您没有关于这只股票的事件记录!");
-//                }
-//                for (GupiaoEvent event : gupiaoEventList) {
-//                    result.append("类型：").append(event.getTypeForShow());
-//                    result.append(",内容:").append(event.getContent());
-//                    result.append(",当时股价:").append(event.getMoney());
-//                    result.append(",时间：").append(DateUtil.stampToDate(event.getCtime()));
-//                    result.append("\r\n");
-//                }
-//            }
-//
-//        } else if (content.startsWith("1:")) {
-//            String[] strings = content.split(":");
-//            Mygupiao mygupiao = mygupiaoService.getByUsernameAndCode(username, strings[1]);
-//            if(mygupiao == null) {
-//                result.append("对不起，您没有这只股票,请添加到自选股里");
-//            } else {
-//                gupiaoEventService.addGupiaoEvent(mygupiao.getId(), 1, strings[2], SinaUtil.getGupiaoPrice(mygupiao.getGupiaoCode()).getPrice());
-//                result.append("您已成功完成点评");
-//            }
+        } else if (content.startsWith(Common.removeGupiao)) {
+            String code = content.substring(1);
+            Mygupiao mygupiao = mygupiaoService.getByUsernameAndCode(username, code);
+            if (mygupiao == null) {
+                result.append("您不存在该股票");
+            } else {
+                int resultCode = mygupiaoService.removeByUsernameAndCode(username, code);
+                result.append("您已成功移除" + code + "股票!");
+            }
+        } else if (content.length() == 6) {
+            //直接输入股票代码
+            Mygupiao mygupiao = mygupiaoService.getByUsernameAndCode(username, content);
+            if (mygupiao == null) {
+                result.append("您没有该股票");
+            } else {
+                return listOverResolver.realShowDetail(username, content, null);
+            }
         } else {
             UserContext userContext = userContextMap.get(username);
             if (userContext == null) {
